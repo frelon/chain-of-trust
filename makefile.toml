@@ -1,7 +1,0 @@
-[tasks.root-ns]
-script = "dig ns . +noall +answer +additional > root-servers.txt"
-
-[tasks.root-dnskey]
-script = "dig dnskey . +noall +answer >> root-servers.txt"
-dependencies = ["root-ns"]
-

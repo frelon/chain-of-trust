@@ -3,6 +3,10 @@ name = "chain-of-trust"
 version = "0.1.0"
 edition = "2021"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
 [dependencies]
+enum-display-derive = "0.1.1"
+enum-utils = "0.1.1"
+console = "0.15.0"
+indicatif = "0.16.2"
+trust-dns-client = { version = "0.21.2", features = ["dnssec"] }
+clap = { version = "3.1.8", features = ["derive"] }
