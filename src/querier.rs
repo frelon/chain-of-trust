@@ -58,17 +58,15 @@ fn to_ns(response: DnsResponse) -> Nameservers {
 
     for record in response
         .answers()
-        .into_iter()
+        .iter()
         .chain(response.name_servers())
     {
         if let Some(ns) = record.data().and_then(RData::as_ns) {
             let addrs = response
                 .additionals()
-                .into_iter()
+                .iter()
                 .filter(|x| x.name() == ns)
-                .map(|x| into_address(x))
-                .filter(|x| x.is_some())
-                .map(|x| x.unwrap())
+                .filter_map(into_address)
                 .collect::<Vec<IpAddr>>();
 
             name_servers.push(Nameserver {
@@ -171,7 +169,7 @@ impl Querier {
 
             return Ok(ds
                 .answers()
-                .into_iter()
+                .iter()
                 .map(|x| {
                     x.data()
                         .and_then(RData::as_dnssec)
@@ -196,7 +194,7 @@ impl Querier {
 
             return Ok(dnskey
                 .answers()
-                .into_iter()
+                .iter()
                 .map(|x| {
                     x.data()
                         .and_then(RData::as_dnssec)
